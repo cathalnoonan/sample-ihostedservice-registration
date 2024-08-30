@@ -1,0 +1,9 @@
+version: 2
+
+updates:
+  - package-ecosystem: "nuget"
+    commit-message:
+      prefix: "[nuget] "
+    directory: "/"
+    schedule:
+      interval: "weekly"
