@@ -1,0 +1,37 @@
+name: dotnet
+
+on:
+  push:
+    branches:
+      - '**'
+    paths:
+      - '.github/workflows/dotnet.yml'
+      - 'global.json'
+      - 'src/**/*.json'
+      - '**.cs'
+      - '**.csproj'
+      - '**.sln'
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  dotnet-test:
+    name: dotnet test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+      - run: dotnet restore
+      - run: dotnet build --no-restore
+      - run: dotnet test --no-build
+
+  dotnet-format:
+    name: dotnet format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+      - run: dotnet format --verify-no-changes
