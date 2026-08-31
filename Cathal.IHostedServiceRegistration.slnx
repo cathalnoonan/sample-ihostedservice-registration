@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Cathal.IHostedServiceRegistration/Cathal.IHostedServiceRegistration.csproj" />
+    <Project Path="src/Cathal.IHostedServiceRegistration.Tests/Cathal.IHostedServiceRegistration.Tests.csproj" />
+  </Folder>
+</Solution>
