@@ -1,8 +1,8 @@
 # IHostedService Registration
 
-By default, the implementation used when registering an `IHostedService` with the Microsoft.Extensions.DependencyInjection ServicesCollection is not registered as the service type.
+By default, the implementation used when registering an `IHostedService` with the Microsoft.Extensions.DependencyInjection ServiceCollection is not registered as the service type.
 
-Instead, all hosted services added using `.AddHostedService<THostedService>()` are registered as implementations of `IHostedService` ([see implementations here](https://github.com/dotnet/runtime/blob/v8.0.0/src/libraries/Microsoft.Extensions.Hosting.Abstractions/src/ServiceCollectionHostedServiceExtensions.cs)).
+Instead, all hosted services added using `.AddHostedService<THostedService>()` are registered as implementations of `IHostedService` ([see implementations here](https://github.com/dotnet/runtime/blob/v10.0.0/src/libraries/Microsoft.Extensions.Hosting.Abstractions/src/ServiceCollectionHostedServiceExtensions.cs#L25)).
 
 This makes it awkward to retrieve a specific hosted service from the `IServiceProvider`.
 
@@ -31,7 +31,7 @@ var myHostedService = serviceProvider.GetService<MyHostedService>();   // Null
 
 ## Solution
 
-To allow a way to retrieve specific hosted services easily, add extension methods to your project that wrap the `AddHostedService<THostedService>()` method (and any overloads as necessary).
+To allow a way to retrieve specific hosted services easily, add extension methods to your project that wrap the `.AddHostedService<THostedService>()` method (and any overloads as necessary).
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
@@ -72,7 +72,7 @@ public static class RegistrationExtensions
 }
 ```
 
-After these extension methods have been added, register and retrieve the hosted service from the IService provider as follows:
+After these extension methods have been added, register and retrieve the hosted service from the IServiceProvider as follows:
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
